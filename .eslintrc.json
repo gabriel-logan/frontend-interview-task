@@ -1,7 +1,54 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript", "universe/web"],
-  "root": true,
-  "rules": {
-    "@typescript-eslint/ban-types": "off"
-  }
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"project": "tsconfig.json"
+	},
+	"plugins": [
+		"import"
+	],
+	"extends": [
+		"next/core-web-vitals",
+		"next/typescript"
+	],
+	"root": true,
+	"rules": {
+		"no-console": "warn",
+		"@typescript-eslint/consistent-type-imports": "error",
+		"@typescript-eslint/consistent-type-exports": "error",
+		"semi": [
+			"error",
+			"always"
+		],
+		"import/default": "off",
+		"import/export": "error",
+		"import/first": "warn",
+		"import/namespace": [
+			"error",
+			{
+				"allowComputed": true
+			}
+		],
+		"import/no-duplicates": "error",
+		"import/order": [
+			"warn",
+			{
+				"groups": [
+					[
+						"builtin",
+						"external"
+					],
+					"internal",
+					[
+						"parent",
+						"index",
+						"sibling"
+					]
+				],
+				"newlines-between": "always",
+				"alphabetize": {
+					"order": "asc"
+				}
+			}
+		]
+	}
 }

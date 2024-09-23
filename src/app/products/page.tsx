@@ -24,7 +24,7 @@ export default function Products() {
     if (inView) {
       fetchNextPage();
     }
-  }, [inView, fetchNextPage]);
+  }, [fetchNextPage, inView]);
 
   if (isLoading) {
     return <Loading />;

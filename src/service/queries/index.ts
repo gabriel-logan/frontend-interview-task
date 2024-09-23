@@ -1,4 +1,4 @@
-import { Product, Products } from "@/types/Products";
+import type { Product, Products } from "@/types/Products";
 
 import { fetcher } from "../fetcher/axiosInstance";
 
