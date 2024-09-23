@@ -1,8 +1,10 @@
+"use client";
+
 import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="min-h-screen flex items-center flex-col gap-6 justify-center">
       <Link
         href="/products"
         className="text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded"

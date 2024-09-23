@@ -4,14 +4,17 @@
 		"project": "tsconfig.json"
 	},
 	"plugins": [
-		"import"
+		"import",
+		"prettier"
 	],
 	"extends": [
 		"next/core-web-vitals",
-		"next/typescript"
+		"next/typescript",
+		"prettier"
 	],
 	"root": true,
 	"rules": {
+		"prettier/prettier": "error",
 		"no-console": "warn",
 		"@typescript-eslint/consistent-type-imports": "error",
 		"@typescript-eslint/consistent-type-exports": "error",
