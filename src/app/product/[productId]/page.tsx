@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import Loading from "@/components/Loading";
@@ -30,26 +31,45 @@ export default function ProductId({ params: { productId } }: ProductIdProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-500 to-purple-500 p-10">
-      <h1 className="text-4xl font-bold mb-5 text-white text-shadow-lg text-center">
+    <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-500 p-10">
+      <Link
+        className="text-white text-xl font-semibold hover:text-blue-200"
+        href="/product"
+      >
+        ← Back to Products
+      </Link>
+
+      <h1 className="text-5xl mt-6 font-extrabold mb-8 text-white text-center shadow-lg p-2">
         {product.title}
       </h1>
-      <div className="flex justify-center items-center">
-        <Image
-          className="rounded-lg shadow-lg border-4 border-white"
-          src={product.image}
-          alt={product.title}
-          width={400}
-          height={250}
-        />
-      </div>
-      <div className="text-center mt-5 text-white">
-        <p className="text-lg">{product.category}</p>
-        <p className="text-2xl font-semibold mt-2">${product.price}</p>
-        <p className="mt-4">{product.description}</p>
-        <button className="mt-6 px-6 py-2 bg-green-500 text-white font-bold rounded-full shadow-lg hover:bg-green-600 transition duration-300">
-          Buy Now
-        </button>
+
+      <div className="flex flex-col lg:flex-row justify-center items-center lg:items-start gap-10 lg:gap-16">
+        <div className="flex justify-center items-center">
+          <Image
+            className="rounded-xl shadow-xl border-8 border-white transform hover:scale-105 transition duration-500 ease-in-out"
+            src={product.image}
+            alt={product.title}
+            width={450}
+            height={300}
+          />
+        </div>
+
+        <div className="text-center lg:text-left text-white max-w-lg">
+          <p className="text-xl uppercase font-semibold text-blue-200">
+            {product.category}
+          </p>
+          <p className="text-3xl font-bold mt-4">${product.price}</p>
+          <p className="mt-6 text-lg">{product.description}</p>
+
+          <div className="flex flex-col mt-8 gap-4">
+            <button className="px-8 py-3 bg-green-500 text-white font-bold rounded-full shadow-lg hover:bg-green-600 hover:shadow-2xl transition-transform duration-300 ease-in-out">
+              Buy Now
+            </button>
+            <button className="px-8 py-3 bg-blue-500 text-white font-bold rounded-full shadow-lg hover:bg-blue-600 hover:shadow-2xl transition-transform duration-300 ease-in-out">
+              Add to Cart
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
