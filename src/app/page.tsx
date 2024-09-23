@@ -1,11 +1,14 @@
-import axiosInstance from "@/service/fetcher/axiosInstance";
+import Link from "next/link";
 
-export default async function Home() {
-  const getAllProducts = await axiosInstance.get("/products");
-
+export default function Home() {
   return (
-    <div className="min-h-screen">
-      <h1>{JSON.stringify(getAllProducts.data)}</h1>
+    <div className="min-h-screen flex items-center justify-center">
+      <Link
+        href="/products"
+        className="text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded"
+      >
+        See Products
+      </Link>
     </div>
   );
 }
