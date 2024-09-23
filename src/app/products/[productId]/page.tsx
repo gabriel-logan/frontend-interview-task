@@ -34,7 +34,7 @@ export default function ProductId({ params: { productId } }: ProductIdProps) {
     <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-500 p-10">
       <Link
         className="text-white text-xl font-semibold hover:text-blue-200"
-        href="/product"
+        href="/products"
       >
         ← Back to Products
       </Link>
