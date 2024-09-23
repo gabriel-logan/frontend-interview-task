@@ -7,6 +7,9 @@ const axiosInstance = axios.create({
 });
 
 export const fetcher = (url: string) =>
-  axiosInstance.get(url).then((res) => res.data);
+  axiosInstance
+    .get(url)
+    .then((res) => res.data)
+    .catch((err) => err);
 
 export default axiosInstance;

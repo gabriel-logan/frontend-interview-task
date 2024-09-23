@@ -31,7 +31,7 @@ export default function ProductId({ params: { productId } }: ProductIdProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-500 to-purple-500 p-10">
-      <h1 className="text-4xl font-bold mb-5 text-white text-shadow-lg">
+      <h1 className="text-4xl font-bold mb-5 text-white text-shadow-lg text-center">
         {product.title}
       </h1>
       <div className="flex justify-center items-center">
