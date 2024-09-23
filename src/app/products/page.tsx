@@ -52,7 +52,7 @@ export default function Products() {
                   <p className="text-sm text-gray-500">{product.category}</p>
                 </div>
                 <Link
-                  href={`/product/${product.id}`}
+                  href={`/products/${product.id}`}
                   className="flex h-full justify-center items-center overflow-hidden"
                 >
                   <Image
