@@ -1,6 +1,5 @@
+import { fetcher } from "@/actions/fetcher";
 import type { Product, Products } from "@/types/Products";
-
-import { fetcher } from "../fetcher/axiosInstance";
 
 export default async function getAllProducts({ pageParam = 0 }): Promise<{
   data: Products;
@@ -8,7 +7,8 @@ export default async function getAllProducts({ pageParam = 0 }): Promise<{
   nextPage: number | undefined;
 }> {
   const limit = 5;
-  const products: Products = await fetcher(`/products`);
+
+  const products = await fetcher<Products>(`/products`);
 
   const productsLimited: Products = products.slice(
     pageParam * limit,

@@ -69,6 +69,7 @@ export default function CartModal() {
                     height={80}
                     alt={item.title}
                     className="rounded-lg"
+                    priority
                   />
                   <div>
                     <h2 className="text-lg font-semibold">{item.title}</h2>

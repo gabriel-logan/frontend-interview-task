@@ -73,6 +73,7 @@ export default function ProductIdIntercepted({
             alt={product.title}
             width={450}
             height={300}
+            priority
           />
         </div>
 

@@ -71,6 +71,7 @@ export default function ProductId({ params: { productId } }: ProductIdProps) {
             alt={product.title}
             width={450}
             height={300}
+            priority
           />
         </div>
 

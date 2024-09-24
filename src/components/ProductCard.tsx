@@ -44,6 +44,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           alt={product.title}
           width={300}
           height={250}
+          priority
           className="rounded-lg w-auto h-auto object-cover group-hover:scale-110 transition-transform duration-300"
         />
       </Link>
