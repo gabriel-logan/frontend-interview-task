@@ -74,6 +74,7 @@ export default function CartModal() {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3 }}
                   key={item.id}
+                  datatype="cart-item"
                   className="flex border flex-col sm:flex-row sm:items-center sm:justify-between bg-gray-100 p-4 rounded-lg shadow"
                 >
                   <div className="flex items-center space-x-4">
@@ -84,6 +85,7 @@ export default function CartModal() {
                       alt={item.title}
                       className="rounded-lg"
                       priority
+                      datatype="cart-item-image"
                     />
                     <div>
                       <h2 className="text-lg font-semibold">{item.title}</h2>

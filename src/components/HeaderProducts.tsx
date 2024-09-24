@@ -15,6 +15,7 @@ export default function HeaderProducts() {
         </h1>
         <div className="mr-6">
           <button
+            datatype="cart-link"
             onClick={() => {
               setCartModal(!cartModal);
             }}

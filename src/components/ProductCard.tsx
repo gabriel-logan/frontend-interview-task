@@ -24,6 +24,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.4, ease: "easeInOut", bounce: 0 }}
+      datatype="product-card"
       className="group relative p-6 flex gap-6 flex-col bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-2 hover:scale-105 border border-gray-200"
     >
       <div className="mb-4">
@@ -49,7 +50,10 @@ export default function ProductCard({ product }: ProductCardProps) {
         whileTap={{ scale: 0.95 }}
         className="h-full flex justify-center items-center"
       >
-        <Link href={`/products/${product.id}`}>
+        <Link
+          datatype="product-card-image-link"
+          href={`/products/${product.id}`}
+        >
           <Image
             src={product.image}
             alt={product.title}
@@ -69,6 +73,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           Buy Now
         </motion.button>
         <motion.button
+          datatype="add-to-cart"
           className=""
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}

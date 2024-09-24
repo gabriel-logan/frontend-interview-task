@@ -30,7 +30,10 @@ export default function Products() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-8">
+    <div
+      datatype="products-page"
+      className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-8"
+    >
       <CartModal />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

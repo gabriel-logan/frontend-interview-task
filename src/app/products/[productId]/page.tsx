@@ -75,7 +75,9 @@ export default function ProductId({ params: { productId } }: ProductIdProps) {
             {product.category}
           </p>
           <p className="text-3xl font-bold mt-4">${product.price}</p>
-          <p className="mt-6 text-lg">{product.description}</p>
+          <p datatype="product-description" className="mt-6 text-lg">
+            {product.description}
+          </p>
 
           <div className="flex flex-col mt-8 gap-4">
             <button className="px-8 py-3 bg-green-500 text-white font-bold rounded-full shadow-lg hover:bg-green-600 hover:shadow-2xl transition-transform duration-300 ease-in-out">
