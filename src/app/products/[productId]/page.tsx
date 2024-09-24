@@ -47,7 +47,7 @@ export default function ProductId({ params: { productId } }: ProductIdProps) {
         ← Back to Products
       </Link>
 
-      <h1 className="text-5xl mt-6 font-extrabold mb-8 text-white text-center shadow-lg p-2">
+      <h1 className="text-5xl mt-6 font-extrabold mb-8 rounded text-white text-center shadow-lg p-2">
         {product.title}
       </h1>
 

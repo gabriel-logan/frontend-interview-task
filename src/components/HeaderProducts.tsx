@@ -10,7 +10,7 @@ export default function HeaderProducts() {
   return (
     <header className="pb-32 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700">
       <div className="flex w-full h-24 z-50 justify-between items-center fixed bg-opacity-90 backdrop-blur-md shadow-lg">
-        <h1 className="text-4xl ml-6 font-extrabold text-blue-100 text-center tracking-wide drop-shadow-lg">
+        <h1 className="text-3xl sm:text-4xl ml-6 font-extrabold text-blue-100 text-center tracking-wide drop-shadow-lg">
           Explore Our Products
         </h1>
         <div className="mr-6">

@@ -62,7 +62,9 @@ export default function CartModal() {
         >
           <IoClose size={32} />
         </button>
-        <h1 className="text-3xl font-bold mb-8 text-center">Your Cart</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold mb-8 text-center">
+          Your Cart
+        </h1>
         <div className="space-y-6">
           <AnimatePresence>
             {items.length > 0 ? (
@@ -72,9 +74,9 @@ export default function CartModal() {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3 }}
                   key={item.id}
-                  className="flex items-center justify-between bg-gray-100 p-4 rounded-lg shadow"
+                  className="flex border flex-col sm:flex-row sm:items-center sm:justify-between bg-gray-100 p-4 rounded-lg shadow"
                 >
-                  <div className="flex items-center space-x-4">
+                  <div className="flex border items-center space-x-4">
                     <Image
                       src={item.image}
                       width={80}
@@ -105,7 +107,7 @@ export default function CartModal() {
                       </div>
                     </div>
                   </div>
-                  <div className="text-right">
+                  <div className="text-left border sm:text-right">
                     <button
                       className="text-red-500 hover:text-red-700 transition mb-2"
                       onClick={() => {
