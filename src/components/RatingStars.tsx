@@ -10,7 +10,7 @@ export default function RatingStars({
   color?: string;
 }) {
   return (
-    <div className="flex items-center">
+    <span className="flex items-center">
       {[1, 2, 3, 4, 5].map((star) => {
         if (rating >= star) {
           return <IoStarSharp key={star} color={color} size={size} />;
@@ -20,6 +20,6 @@ export default function RatingStars({
           return <IoStarOutline key={star} color={color} size={size} />;
         }
       })}
-    </div>
+    </span>
   );
 }

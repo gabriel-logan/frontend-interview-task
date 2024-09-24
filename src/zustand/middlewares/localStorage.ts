@@ -1,9 +1,11 @@
 import type { StateCreator } from "zustand";
 
-const localStorageMiddleware =
-  <T extends object>(config: StateCreator<T>, key: string): StateCreator<T> =>
-  (set, get, api) =>
-    config(
+const localStorageMiddleware = <T extends object>(
+  config: StateCreator<T>,
+  key: string,
+): StateCreator<T> => {
+  return (set, get, api) => {
+    return config(
       (args) => {
         set(args);
         localStorage.setItem(key, JSON.stringify(get()));
@@ -11,5 +13,7 @@ const localStorageMiddleware =
       get,
       api,
     );
+  };
+};
 
 export default localStorageMiddleware;

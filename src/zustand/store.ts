@@ -4,13 +4,15 @@ import type { Cart } from "@/types/zustand/Cart";
 
 import localStorageMiddleware from "./middlewares/localStorage";
 
+const cartKey = "cart";
+
 const initialState: Cart = JSON.parse(
-  localStorage.getItem("cart") || '{"items":[]}',
+  localStorage.getItem(cartKey) || '{"items":[]}',
 );
 
 export const useCart = create<Cart>(
-  localStorageMiddleware(
-    (set) => ({
+  localStorageMiddleware((set) => {
+    return {
       ...initialState,
       add: (item) => {
         set((state) => {
@@ -45,7 +47,16 @@ export const useCart = create<Cart>(
           ),
         }));
       },
-    }),
-    "cart",
-  ),
+    };
+  }, cartKey),
 );
+
+export const useCount = create<{
+  count: number;
+  increment: () => void;
+  decrement: () => void;
+}>((set) => ({
+  count: 0,
+  increment: () => set((state) => ({ count: state.count + 1 })),
+  decrement: () => set((state) => ({ count: state.count - 1 })),
+}));
