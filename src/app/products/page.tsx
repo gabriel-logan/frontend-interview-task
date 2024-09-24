@@ -68,7 +68,7 @@ export default function Products() {
                   </h2>
 
                   <p className="text-lg text-gray-600">
-                    {parseFloat(product.price).toLocaleString("en-US", {
+                    {product.price.toLocaleString("en-US", {
                       maximumFractionDigits: 2,
                       currency: "USD",
                       style: "currency",

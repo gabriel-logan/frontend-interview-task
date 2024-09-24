@@ -39,7 +39,7 @@ export default function CartModal({ cartModal, setCartModal }: CartModalProps) {
   const calculateCartTotalPrice = () => {
     return items.reduce((total, item) => {
       const quantity = quantities[item.id] || 1;
-      return total + calculateItemTotalPrice(parseFloat(item.price), quantity);
+      return total + calculateItemTotalPrice(item.price, quantity);
     }, 0);
   };
 
@@ -61,6 +61,7 @@ export default function CartModal({ cartModal, setCartModal }: CartModalProps) {
           backgroundColor: "rgba(0, 0, 0, 0.7)",
         },
       }}
+      ariaHideApp={false}
     >
       <div className="relative">
         <button
@@ -123,7 +124,7 @@ export default function CartModal({ cartModal, setCartModal }: CartModalProps) {
                   </button>
                   <p className="text-lg font-semibold">
                     {calculateItemTotalPrice(
-                      parseFloat(item.price),
+                      item.price,
                       quantities[item.id] || 1,
                     ).toLocaleString("en-US", {
                       maximumFractionDigits: 2,
