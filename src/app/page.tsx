@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <motion.div className="min-h-screen flex items-center flex-col gap-6 justify-center">
       <motion.button
-        whileHover={{ scale: 1.1 }}
+        whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.9 }}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
