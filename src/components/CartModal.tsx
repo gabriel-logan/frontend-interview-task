@@ -5,6 +5,7 @@ import { useState, type Dispatch, type SetStateAction } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { IoClose, IoRemoveCircle } from "react-icons/io5";
 import ReactModal from "react-modal";
+import { toast } from "react-toastify";
 
 import { useCart } from "@/zustand/store";
 
@@ -113,6 +114,9 @@ export default function CartModal({ cartModal, setCartModal }: CartModalProps) {
                     className="text-red-500 hover:text-red-700 transition mb-2"
                     onClick={() => {
                       remove(item);
+                      toast.info("Product removed from cart", {
+                        autoClose: 500,
+                      });
                     }}
                   >
                     <IoRemoveCircle size={24} />

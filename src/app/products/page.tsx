@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Fragment, useEffect, useState } from "react";
 import { FaCartArrowDown, FaShoppingCart } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
+import { toast } from "react-toastify";
 
 import CartModal from "@/components/CartModal";
 import Loading, { LoadingIcon } from "@/components/Loading";
@@ -95,9 +96,12 @@ export default function Products() {
                     className=""
                     onClick={() => {
                       if (items.find((i) => i.id === product.id)) {
-                        return alert("Item already in cart");
+                        return toast.error("Product already in cart");
                       }
                       add(product);
+                      toast.success("Product added to cart", {
+                        autoClose: 500,
+                      });
                     }}
                   >
                     <FaCartArrowDown
