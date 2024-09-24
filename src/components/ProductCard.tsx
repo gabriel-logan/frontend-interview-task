@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { FaCartArrowDown } from "react-icons/fa";
@@ -16,7 +19,13 @@ export default function ProductCard({ product }: ProductCardProps) {
   const { items, add } = useCart((state) => state);
 
   return (
-    <div className="group relative p-6 flex gap-6 flex-col bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-2 hover:scale-105 border border-gray-200">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.4, ease: "easeInOut", bounce: 0 }}
+      className="group relative p-6 flex gap-6 flex-col bg-white rounded-xl shadow-lg hover:shadow-2xl transition duration-300 ease-in-out transform hover:-translate-y-2 hover:scale-105 border border-gray-200"
+    >
       <div className="mb-4">
         <h2 className="text-2xl font-bold text-gray-800 group-hover:text-blue-700 transition">
           {product.title}
@@ -35,23 +44,30 @@ export default function ProductCard({ product }: ProductCardProps) {
         </p>
         <p className="text-sm text-gray-500">{product.category}</p>
       </div>
-      <Link
-        href={`/products/${product.id}`}
-        className="flex h-full justify-center items-center overflow-hidden"
+      <motion.div
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        className="h-full flex justify-center items-center"
       >
-        <Image
-          src={product.image}
-          alt={product.title}
-          width={200}
-          height={200}
-          priority
-          className="rounded-lg w-auto h-auto object-cover group-hover:scale-110 transition-transform duration-300"
-        />
-      </Link>
+        <Link href={`/products/${product.id}`}>
+          <Image
+            src={product.image}
+            alt={product.title}
+            width={200}
+            height={200}
+            priority
+            className="rounded-lg w-auto h-auto"
+          />
+        </Link>
+      </motion.div>
       <div className="flex flex-col items-center justify-center gap-2">
-        <button className="text-blue-500 text-lg hover:text-blue-400 active:text-blue-600 ease-in-out duration-200">
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="text-blue-500 text-lg hover:text-blue-400 active:text-blue-600 ease-in-out duration-200"
+        >
           Buy Now
-        </button>
+        </motion.button>
         <button
           className=""
           onClick={() => {
@@ -70,6 +86,6 @@ export default function ProductCard({ product }: ProductCardProps) {
           />
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }

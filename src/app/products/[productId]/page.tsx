@@ -1,6 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -51,16 +52,23 @@ export default function ProductId({ params: { productId } }: ProductIdProps) {
       </h1>
 
       <div className="flex flex-col lg:flex-row justify-center items-center lg:items-start gap-10 lg:gap-16">
-        <div className="flex justify-center items-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          transition={{ duration: 0.3 }}
+          whileHover={{ scale: 1.05 }}
+          className="flex justify-center items-center"
+        >
           <Image
-            className="rounded-xl shadow-xl border-8 border-white transform hover:scale-105 transition duration-500 ease-in-out"
+            className="rounded-xl shadow-xl border-8 border-white"
             src={product.image}
             alt={product.title}
             width={450}
             height={300}
             priority
           />
-        </div>
+        </motion.div>
 
         <div className="text-center lg:text-left text-white max-w-lg">
           <p className="text-xl uppercase font-semibold text-blue-200">
