@@ -41,7 +41,7 @@ export default function Products() {
             setCartModal(true);
           }}
         >
-          <FaShoppingCart size={64} color="black" />
+          <FaShoppingCart className="text-3xl md:text-6xl" color="black" />
         </button>
       </div>
 
