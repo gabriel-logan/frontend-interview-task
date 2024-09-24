@@ -38,6 +38,7 @@ export default function CartModal() {
           margin: "auto",
           padding: "20px",
           borderRadius: "10px",
+          marginTop: "10vh",
         },
         overlay: {
           backgroundColor: "rgba(0, 0, 0, 0.7)",

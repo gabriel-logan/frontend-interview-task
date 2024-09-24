@@ -42,8 +42,8 @@ export default function ProductCard({ product }: ProductCardProps) {
         <Image
           src={product.image}
           alt={product.title}
-          width={300}
-          height={250}
+          width={200}
+          height={200}
           priority
           className="rounded-lg w-auto h-auto object-cover group-hover:scale-110 transition-transform duration-300"
         />

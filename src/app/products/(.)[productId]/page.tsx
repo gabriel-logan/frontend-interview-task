@@ -4,13 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { FaShoppingCart } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 import CartModal from "@/components/CartModal";
 import Loading from "@/components/Loading";
 import { getProductById } from "@/service/queries";
-import { useCart, useCartModal } from "@/zustand/store";
+import { useCart } from "@/zustand/store";
 
 interface ProductIdInterceptedProps {
   params: {
@@ -21,8 +20,6 @@ interface ProductIdInterceptedProps {
 export default function ProductIdIntercepted({
   params: { productId },
 }: ProductIdInterceptedProps) {
-  const { setCartModal } = useCartModal();
-
   const { items, add } = useCart();
 
   const parsedProductId = parseInt(productId, 10);
@@ -42,24 +39,14 @@ export default function ProductIdIntercepted({
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-500 p-10">
+      <CartModal />
+
       <Link
         className="text-white text-xl font-semibold hover:text-blue-200"
         href="/products"
       >
         ← Back to Products
       </Link>
-
-      <div className="fixed top-4 right-4 z-50">
-        <button
-          onClick={() => {
-            setCartModal(true);
-          }}
-        >
-          <FaShoppingCart size={64} color="black" />
-        </button>
-      </div>
-
-      <CartModal />
 
       <h1 className="text-5xl mt-6 font-extrabold mb-8 text-white text-center shadow-lg p-2">
         {product.title}
