@@ -15,21 +15,25 @@ interface CartModalProps {
 }
 
 export default function CartModal({ cartModal, setCartModal }: CartModalProps) {
-  const { items, remove } = useCart((state) => state);
+  const { items, remove, increaseQuantity, decreaseQuantity } = useCart(
+    (state) => state,
+  );
   const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
 
-  const increaseQuantity = (id: string) => {
+  const increaseQuantityLocal = (id: string) => {
     setQuantities((prev) => ({
       ...prev,
       [id]: (prev[id] || 1) + 1,
     }));
+    increaseQuantity(parseInt(id));
   };
 
-  const decreaseQuantity = (id: string) => {
+  const decreaseQuantityLocal = (id: string) => {
     setQuantities((prev) => ({
       ...prev,
       [id]: Math.max((prev[id] || 1) - 1, 1),
     }));
+    decreaseQuantity(parseInt(id));
   };
 
   const calculateItemTotalPrice = (price: number, quantity: number) => {
@@ -93,7 +97,9 @@ export default function CartModal({ cartModal, setCartModal }: CartModalProps) {
                     <p className="text-sm text-gray-500">{item.category}</p>
                     <div className="flex items-center space-x-2 mt-2">
                       <button
-                        onClick={() => decreaseQuantity(item.id.toString())}
+                        onClick={() =>
+                          decreaseQuantityLocal(item.id.toString())
+                        }
                         className="p-2 bg-gray-200 rounded-full hover:bg-gray-300"
                       >
                         <FaMinus size={12} />
@@ -102,7 +108,9 @@ export default function CartModal({ cartModal, setCartModal }: CartModalProps) {
                         {quantities[item.id] || 1}
                       </span>
                       <button
-                        onClick={() => increaseQuantity(item.id.toString())}
+                        onClick={() =>
+                          increaseQuantityLocal(item.id.toString())
+                        }
                         className="p-2 bg-gray-200 rounded-full hover:bg-gray-300"
                       >
                         <FaPlus size={12} />

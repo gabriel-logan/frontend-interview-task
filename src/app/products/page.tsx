@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 
 import CartModal from "@/components/CartModal";
 import Loading, { LoadingIcon } from "@/components/Loading";
+import RatingStars from "@/components/RatingStars";
 import getAllProducts from "@/service/queries";
 import { useCart } from "@/zustand/store";
 
@@ -73,6 +74,10 @@ export default function Products() {
                       currency: "USD",
                       style: "currency",
                     })}
+                  </p>
+                  <p className="text-sm text-gray-500 flex gap-1">
+                    {product.rating.count} reviews | {product.rating.rate}
+                    <RatingStars rating={product.rating.rate} />
                   </p>
                   <p className="text-sm text-gray-500">{product.category}</p>
                 </div>
