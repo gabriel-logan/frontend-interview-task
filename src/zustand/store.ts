@@ -1,20 +1,15 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 import type { Cart } from "@/types/zustand/Cart";
 import type { CartModal } from "@/types/zustand/CartModal";
 
-import localStorageMiddleware from "./middlewares/localStorage";
-
 const cartKey = "cart";
 
-const initialState: Cart = JSON.parse(
-  localStorage.getItem(cartKey) || '{"items":[]}',
-);
-
-export const useCart = create<Cart>(
-  localStorageMiddleware((set) => {
-    return {
-      ...initialState,
+export const useCart = create(
+  persist<Cart>(
+    (set) => ({
+      items: [],
       add: (item) => {
         set((state) => {
           const existingItem = state.items.find((i) => i.id === item.id);
@@ -48,8 +43,11 @@ export const useCart = create<Cart>(
           ),
         }));
       },
-    };
-  }, cartKey),
+    }),
+    {
+      name: cartKey,
+    },
+  ),
 );
 
 export const useCartModal = create<CartModal>((set) => ({

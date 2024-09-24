@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { IoClose, IoRemoveCircle } from "react-icons/io5";
 import ReactModal from "react-modal";
@@ -15,23 +14,6 @@ export default function CartModal() {
   const { items, remove, increaseQuantity, decreaseQuantity } = useCart(
     (state) => state,
   );
-  const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
-
-  const increaseQuantityLocal = (id: string) => {
-    setQuantities((prev) => ({
-      ...prev,
-      [id]: (prev[id] || 1) + 1,
-    }));
-    increaseQuantity(parseInt(id));
-  };
-
-  const decreaseQuantityLocal = (id: string) => {
-    setQuantities((prev) => ({
-      ...prev,
-      [id]: Math.max((prev[id] || 1) - 1, 1),
-    }));
-    decreaseQuantity(parseInt(id));
-  };
 
   const calculateItemTotalPrice = (price: number, quantity: number) => {
     return price * quantity;
@@ -39,7 +21,7 @@ export default function CartModal() {
 
   const calculateCartTotalPrice = () => {
     return items.reduce((total, item) => {
-      const quantity = quantities[item.id] || 1;
+      const quantity = item.quantity || 1;
       return total + calculateItemTotalPrice(item.price, quantity);
     }, 0);
   };
@@ -93,20 +75,16 @@ export default function CartModal() {
                     <p className="text-sm text-gray-500">{item.category}</p>
                     <div className="flex items-center space-x-2 mt-2">
                       <button
-                        onClick={() =>
-                          decreaseQuantityLocal(item.id.toString())
-                        }
+                        onClick={() => decreaseQuantity(item.id)}
                         className="p-2 bg-gray-200 rounded-full hover:bg-gray-300"
                       >
                         <FaMinus size={12} />
                       </button>
                       <span className="text-lg font-semibold">
-                        {quantities[item.id] || 1}
+                        {item.quantity || 1}
                       </span>
                       <button
-                        onClick={() =>
-                          increaseQuantityLocal(item.id.toString())
-                        }
+                        onClick={() => increaseQuantity(item.id)}
                         className="p-2 bg-gray-200 rounded-full hover:bg-gray-300"
                       >
                         <FaPlus size={12} />
@@ -129,7 +107,7 @@ export default function CartModal() {
                   <p className="text-lg font-semibold">
                     {calculateItemTotalPrice(
                       item.price,
-                      quantities[item.id] || 1,
+                      item.quantity || 1,
                     ).toLocaleString("en-US", {
                       maximumFractionDigits: 2,
                       currency: "USD",
