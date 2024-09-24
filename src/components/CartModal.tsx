@@ -1,20 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { useState, type Dispatch, type SetStateAction } from "react";
+import { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { IoClose, IoRemoveCircle } from "react-icons/io5";
 import ReactModal from "react-modal";
 import { toast } from "react-toastify";
 
-import { useCart } from "@/zustand/store";
+import { useCart, useCartModal } from "@/zustand/store";
 
-interface CartModalProps {
-  setCartModal: Dispatch<SetStateAction<boolean>>;
-  cartModal: boolean;
-}
+export default function CartModal() {
+  const { setCartModal, cartModal } = useCartModal();
 
-export default function CartModal({ cartModal, setCartModal }: CartModalProps) {
   const { items, remove, increaseQuantity, decreaseQuantity } = useCart(
     (state) => state,
   );
@@ -50,7 +47,6 @@ export default function CartModal({ cartModal, setCartModal }: CartModalProps) {
   return (
     <ReactModal
       isOpen={cartModal}
-      shouldCloseOnEsc={true}
       style={{
         content: {
           backgroundColor: "white",

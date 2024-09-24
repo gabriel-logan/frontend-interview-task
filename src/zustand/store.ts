@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 import type { Cart } from "@/types/zustand/Cart";
+import type { CartModal } from "@/types/zustand/CartModal";
 
 import localStorageMiddleware from "./middlewares/localStorage";
 
@@ -51,12 +52,7 @@ export const useCart = create<Cart>(
   }, cartKey),
 );
 
-export const useCount = create<{
-  count: number;
-  increment: () => void;
-  decrement: () => void;
-}>((set) => ({
-  count: 0,
-  increment: () => set((state) => ({ count: state.count + 1 })),
-  decrement: () => set((state) => ({ count: state.count - 1 })),
+export const useCartModal = create<CartModal>((set) => ({
+  cartModal: false,
+  setCartModal: (value) => set({ cartModal: value }),
 }));

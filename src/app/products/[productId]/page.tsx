@@ -4,9 +4,13 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { FaShoppingCart } from "react-icons/fa";
+import { toast } from "react-toastify";
 
+import CartModal from "@/components/CartModal";
 import Loading from "@/components/Loading";
 import { getProductById } from "@/service/queries";
+import { useCart, useCartModal } from "@/zustand/store";
 
 interface ProductIdProps {
   params: {
@@ -15,6 +19,10 @@ interface ProductIdProps {
 }
 
 export default function ProductId({ params: { productId } }: ProductIdProps) {
+  const { setCartModal } = useCartModal();
+
+  const { items, add } = useCart();
+
   const parsedProductId = parseInt(productId, 10);
 
   const { data: product, isLoading } = useQuery({
@@ -38,6 +46,18 @@ export default function ProductId({ params: { productId } }: ProductIdProps) {
       >
         ← Back to Products
       </Link>
+
+      <div className="fixed top-4 right-4 z-50">
+        <button
+          onClick={() => {
+            setCartModal(true);
+          }}
+        >
+          <FaShoppingCart size={64} color="black" />
+        </button>
+      </div>
+
+      <CartModal />
 
       <h1 className="text-5xl mt-6 font-extrabold mb-8 text-white text-center shadow-lg p-2">
         {product.title}
@@ -65,7 +85,20 @@ export default function ProductId({ params: { productId } }: ProductIdProps) {
             <button className="px-8 py-3 bg-green-500 text-white font-bold rounded-full shadow-lg hover:bg-green-600 hover:shadow-2xl transition-transform duration-300 ease-in-out">
               Buy Now
             </button>
-            <button className="px-8 py-3 bg-blue-500 text-white font-bold rounded-full shadow-lg hover:bg-blue-600 hover:shadow-2xl transition-transform duration-300 ease-in-out">
+            <button
+              className="px-8 py-3 bg-blue-500 text-white font-bold rounded-full shadow-lg hover:bg-blue-600 hover:shadow-2xl transition-transform duration-300 ease-in-out"
+              onClick={() => {
+                if (items.find((i) => i.id === product.id)) {
+                  return toast.error("Product already in cart");
+                }
+
+                add(product);
+
+                toast.success("Product added to cart", {
+                  autoClose: 500,
+                });
+              }}
+            >
               Add to Cart
             </button>
           </div>
