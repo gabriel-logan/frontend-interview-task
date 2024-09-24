@@ -1,14 +1,20 @@
 import { fetcher } from "@/actions/fetcher";
 import type { Product, Products } from "@/types/Products";
 
-export default async function getAllProducts({ pageParam = 0 }): Promise<{
+export async function getAllProducts(): Promise<Products> {
+  const products = await fetcher<Products>(`/products`);
+
+  return products;
+}
+
+export async function getAllProductsInfinityScroll({ pageParam = 0 }): Promise<{
   data: Products;
   currentPage: number;
   nextPage: number | undefined;
 }> {
   const limit = 5;
 
-  const products = await fetcher<Products>(`/products`);
+  const products = await getAllProducts();
 
   const productsLimited: Products = products.slice(
     pageParam * limit,

@@ -7,11 +7,11 @@ import { useInView } from "react-intersection-observer";
 import CartModal from "@/components/CartModal";
 import Loading, { LoadingIcon } from "@/components/Loading";
 import ProductCard from "@/components/ProductCard";
-import getAllProducts from "@/service/queries";
+import { getAllProductsInfinityScroll } from "@/service/queries";
 
 export default function Products() {
   const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryFn: getAllProducts,
+    queryFn: getAllProductsInfinityScroll,
     queryKey: ["products"],
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextPage,

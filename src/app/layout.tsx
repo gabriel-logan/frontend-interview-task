@@ -1,23 +1,11 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import { ToastContainer } from "react-toastify";
-
-import QueryClientProviderWrapper from "@/components/QueryClientProviderWrapper";
-
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
+import type { Metadata } from "next";
+import { ToastContainer } from "react-toastify";
 
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import QueryClientProviderWrapper from "@/components/QueryClientProviderWrapper";
+import { geistMono, geistSans } from "@/fonts";
 
 export const metadata: Metadata = {
   title: {

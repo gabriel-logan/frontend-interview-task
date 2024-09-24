@@ -68,8 +68,11 @@ export default function ProductCard({ product }: ProductCardProps) {
         >
           Buy Now
         </motion.button>
-        <button
+        <motion.button
           className=""
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.2 }}
           onClick={() => {
             if (items.find((i) => i.id === product.id)) {
               return toast.error("Product already in cart");
@@ -84,7 +87,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             className="inline-block text-center text-blue-500 active:text-blue-300 ease-in-out duration-200"
             size={32}
           />
-        </button>
+        </motion.button>
       </div>
     </motion.div>
   );
