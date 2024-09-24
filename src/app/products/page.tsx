@@ -3,14 +3,20 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment, useEffect } from "react";
-import { FaCartArrowDown } from "react-icons/fa";
+import { Fragment, useEffect, useState } from "react";
+import { FaCartArrowDown, FaShoppingCart } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
 
+import CartModal from "@/components/CartModal";
 import Loading, { LoadingIcon } from "@/components/Loading";
 import getAllProducts from "@/service/queries";
+import { useCart } from "@/zustand/store";
 
 export default function Products() {
+  const [cartModal, setCartModal] = useState(false);
+
+  const { items, add } = useCart((state) => state);
+
   const { data, isLoading, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryFn: getAllProducts,
     queryKey: ["products"],
@@ -32,6 +38,18 @@ export default function Products() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 p-8">
+      <div className="fixed top-4 right-4 z-50">
+        <button
+          onClick={() => {
+            setCartModal(true);
+          }}
+        >
+          <FaShoppingCart size={64} color="black" />
+        </button>
+      </div>
+
+      <CartModal cartModal={cartModal} setCartModal={setCartModal} />
+
       <h1 className="text-4xl font-extrabold text-center text-blue-800 mb-10">
         Explore Our Products
       </h1>
@@ -48,7 +66,13 @@ export default function Products() {
                     {product.title}
                   </h2>
 
-                  <p className="text-lg text-gray-600">${product.price}</p>
+                  <p className="text-lg text-gray-600">
+                    {parseFloat(product.price).toLocaleString("en-US", {
+                      maximumFractionDigits: 2,
+                      currency: "USD",
+                      style: "currency",
+                    })}
+                  </p>
                   <p className="text-sm text-gray-500">{product.category}</p>
                 </div>
                 <Link
@@ -67,7 +91,15 @@ export default function Products() {
                   <button className="text-blue-500 text-lg hover:text-blue-400 active:text-blue-600 ease-in-out duration-200">
                     Buy Now
                   </button>
-                  <button className="">
+                  <button
+                    className=""
+                    onClick={() => {
+                      if (items.find((i) => i.id === product.id)) {
+                        return alert("Item already in cart");
+                      }
+                      add(product);
+                    }}
+                  >
                     <FaCartArrowDown
                       className="inline-block text-center text-blue-500 active:text-blue-300 ease-in-out duration-200"
                       size={32}
