@@ -13,9 +13,13 @@ import RatingStars from "./RatingStars";
 
 interface ProductCardProps {
   product: Product;
+  isUnique?: boolean;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({
+  product,
+  isUnique = false,
+}: ProductCardProps) {
   const { items, add } = useCart((state) => state);
 
   return (
@@ -31,6 +35,12 @@ export default function ProductCard({ product }: ProductCardProps) {
         <h2 className="text-2xl font-bold text-gray-800 group-hover:text-blue-700 transition">
           {product.title}
         </h2>
+
+        {isUnique && (
+          <p className="text-sm md:text-base text-gray-500 mt-1 mb-3">
+            {product.description}
+          </p>
+        )}
 
         <p className="text-lg text-gray-600">
           {product.price.toLocaleString("en-US", {
