@@ -14,11 +14,13 @@ import RatingStars from "./RatingStars";
 interface ProductCardProps {
   product: Product;
   isUnique?: boolean;
+  isInterceptRoute?: boolean;
 }
 
 export default function ProductCard({
   product,
   isUnique = false,
+  isInterceptRoute = false,
 }: ProductCardProps) {
   const { items, add } = useCart((state) => state);
 
@@ -60,19 +62,39 @@ export default function ProductCard({
         whileTap={{ scale: 0.95 }}
         className="h-full flex justify-center items-center"
       >
-        <Link
-          datatype="product-card-image-link"
-          href={`/products/${product.id}`}
-        >
-          <Image
-            src={product.image}
-            alt={product.title}
-            width={200}
-            height={200}
-            priority
-            className="rounded-lg w-auto h-auto"
-          />
-        </Link>
+        {isInterceptRoute ? (
+          <motion.button
+            datatype="product-card-image-link"
+            onClick={() => {
+              if (window.location) {
+                window.location.reload();
+              }
+            }}
+          >
+            <Image
+              src={product.image}
+              alt={product.title}
+              width={200}
+              height={200}
+              priority
+              className="rounded-lg w-auto h-auto"
+            />
+          </motion.button>
+        ) : (
+          <Link
+            datatype="product-card-image-link"
+            href={`/products/${product.id}`}
+          >
+            <Image
+              src={product.image}
+              alt={product.title}
+              width={200}
+              height={200}
+              priority
+              className="rounded-lg w-auto h-auto"
+            />
+          </Link>
+        )}
       </motion.div>
       <div className="flex flex-col items-center justify-center gap-2">
         <motion.button

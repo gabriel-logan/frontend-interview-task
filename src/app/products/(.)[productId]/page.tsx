@@ -45,7 +45,7 @@ export default function ProductIdIntercepted({
       </Link>
 
       <div className="mt-10 max-w-4xl m-auto">
-        <ProductCard product={product} isUnique />
+        <ProductCard product={product} isUnique isInterceptRoute />
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ export async function getAllProducts(): Promise<Products | undefined> {
   try {
     return await fetcher<Products>(`/products`);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(error);
   }
 }
@@ -42,6 +43,7 @@ export async function getProductById(id: number): Promise<Product | undefined> {
   try {
     return fetcher(`/products/${id}`);
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error(error);
   }
 }
